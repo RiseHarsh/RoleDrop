@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoleDrop</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h1>RoleDrop 🎲</h1>
+
+  <!-- Setup Screen -->
+  <div id="setupScreen" class="screen active">
+    <label>Total Players:</label>
+    <input type="number" id="totalPlayers" min="2" placeholder="Enter total players">
+
+    <h3>Add Role</h3>
+    <input type="text" id="roleName" placeholder="Role Name">
+    <input type="number" id="roleQty" placeholder="Quantity">
+    <button id="addRoleBtn">Add Role</button>
+
+    <div id="roleList"></div>
+    <button id="generateBtn">Generate Roles</button>
+  </div>
+
+  <!-- Reveal Screen -->
+  <div id="revealScreen" class="screen">
+    <div id="roleCard" class="card">
+      <div class="card-inner">
+        <div class="card-front">Tap to Reveal</div>
+        <div class="card-back" id="roleText"></div>
+      </div>
+    </div>
+    <button id="okBtn">OK</button>
+  </div>
+
+  <!-- Pass Screen -->
+  <div id="passScreen" class="screen">
+    <h2>Pass the phone to next player</h2>
+    <button id="nextPlayerBtn">Next Player</button>
+  </div>
+
+  <!-- Final Admin View -->
+  <div id="adminScreen" class="screen">
+    <button id="adminViewBtn">View Full List</button>
+    <div id="finalList"></div>
+  </div>
+
+  <!-- Music Toggle -->
+  <button id="musicToggleBtn">Music ON</button>
+
+</div>
+
+<!-- Sounds -->
+<audio id="clickSound" src="assets/sounds/click.mp3"></audio>
+<audio id="revealSound" src="assets/sounds/reveal.mp3"></audio>
+<audio id="transitionSound" src="assets/sounds/suspense.mp3"></audio>
+<audio id="bgMusic" src="assets/sounds/bg-music.mp3" loop></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
