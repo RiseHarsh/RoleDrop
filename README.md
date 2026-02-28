@@ -22,19 +22,19 @@ It allows players to reveal their roles one by one, pass the device safely, and 
 ## File Structure
 roledrop/
 ├── index.html → Main HTML structure
-|
+
 ├── style.css → Dark theme + animations
-|
+
 ├── script.js → Game logic + reveal system
-|
+
 ├── assets/
-|
+
 │ ├── sounds/ → All SFX and background music
-|
+
 │ └── img/ → Optional logo/images
-|
+
 ├── README.md → This file
-|
+
 └── vercel.json → Vercel deployment config
 
 
