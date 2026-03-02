@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RoleDrop</title>
+<title>RoleDrop 🎲</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,6 +11,7 @@
 <div class="container">
 
   <h1>RoleDrop 🎲</h1>
+  <h2 id="roundCounter">Round 1</h2>
 
   <!-- Setup Screen -->
   <div id="setupScreen" class="screen active">
@@ -43,13 +44,13 @@
     <button id="nextPlayerBtn">Next Player</button>
   </div>
 
-  <!-- Admin Screen: Next Round & New Game -->
-<div id="adminScreen" class="screen">
-  <button id="nextRoundBtn">Next Round</button>
-  <button id="newGameBtn">New Game</button>
-  <button id="adminViewBtn">View Full List</button>
-  <div id="finalList"></div>
-</div>
+  <!-- Final Admin Screen -->
+  <div id="adminScreen" class="screen">
+    <button id="nextRoundBtn">Next Round</button>
+    <button id="newGameBtn">New Game</button>
+    <button id="adminViewBtn">View Full List</button>
+    <div id="finalList"></div>
+  </div>
 
   <!-- Music Toggle -->
   <button id="musicToggleBtn">Music ON</button>

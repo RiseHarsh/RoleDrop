@@ -1,30 +1,42 @@
 let roles = [];
 let finalAssignment = [];
 let currentPlayer = 0;
-let isMuted = false; // global mute for all sounds
+let currentRound = 1;
+let isMuted = false; // global mute
 
 // Elements
 const roleListDiv = document.getElementById('roleList');
 const roleText = document.getElementById('roleText');
 const card = document.getElementById('roleCard');
+const roundCounter = document.getElementById('roundCounter');
 const clickSound = document.getElementById('clickSound');
 const revealSound = document.getElementById('revealSound');
 const transitionSound = document.getElementById('transitionSound');
 const bgMusic = document.getElementById('bgMusic');
 const musicToggleBtn = document.getElementById('musicToggleBtn');
 
-// Play sound with mute check
+// Play sound
 function playSound(sound){
   if(isMuted) return;
   sound.currentTime = 0;
   sound.play();
 }
 
+// Update round counter
+function updateRoundCounter(){
+  roundCounter.innerText = `Round ${currentRound}`;
+}
+
 // Add role
 document.getElementById('addRoleBtn').onclick = () => {
   const name = document.getElementById('roleName').value.trim();
   const qty = parseInt(document.getElementById('roleQty').value);
-  if(!name || !qty) return alert('Enter role and quantity');
+  if(!name || !qty){
+    const inputField = !name ? document.getElementById('roleName') : document.getElementById('roleQty');
+    inputField.classList.add('errorShake');
+    setTimeout(()=> inputField.classList.remove('errorShake'), 500);
+    return alert('Enter role name and quantity');
+  }
   roles.push({name, qty});
   roleListDiv.innerHTML += `<p>${name} - ${qty}</p>`;
   document.getElementById('roleName').value = '';
@@ -47,6 +59,8 @@ document.getElementById('generateBtn').onclick = () => {
   }
   finalAssignment = tempRoles;
   currentPlayer = 0;
+  currentRound = 1;
+  updateRoundCounter();
   switchScreen('revealScreen');
   playSound(clickSound);
 }
@@ -92,7 +106,7 @@ document.getElementById('adminViewBtn').onclick = () => {
   playSound(clickSound);
 }
 
-// Next Round → reshuffle roles but keep previous setup
+// Next Round → reshuffle
 document.getElementById('nextRoundBtn').onclick = () => {
   if(finalAssignment.length === 0) return alert('Generate roles first!');
   for(let i = finalAssignment.length-1; i>0; i--){
@@ -100,6 +114,8 @@ document.getElementById('nextRoundBtn').onclick = () => {
     [finalAssignment[i], finalAssignment[j]] = [finalAssignment[j], finalAssignment[i]];
   }
   currentPlayer = 0;
+  currentRound++;
+  updateRoundCounter();
   switchScreen('revealScreen');
   playSound(clickSound);
 }
@@ -120,7 +136,6 @@ musicToggleBtn.onclick = () => {
     bgMusic.pause();
     musicToggleBtn.innerText = 'Music ON';
   }
-  // click sound only plays if not muted
   playSound(clickSound);
 }
 
@@ -128,11 +143,14 @@ musicToggleBtn.onclick = () => {
 function repeatGame(){
   finalAssignment = [];
   roles = [];
-  roleListDiv.innerHTML = '';
   currentPlayer = 0;
+  currentRound = 1;
+  roleListDiv.innerHTML = '';
   document.getElementById('totalPlayers').value = '';
   document.getElementById('roleName').value = '';
   document.getElementById('roleQty').value = '';
+  updateRoundCounter();
+  document.getElementById('finalList').innerHTML = '';
   switchScreen('setupScreen');
 }
 
